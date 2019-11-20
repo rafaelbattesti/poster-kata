@@ -1,0 +1,17 @@
+version: "3"
+services:
+  svc-database:
+    image: svc-postgres
+    restart: always
+    container_name: svc-postgres
+    build:
+      context: .
+      dockerfile: ./svc-database/Dockerfile
+    environment:
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+volumes:
+  pgdata:
