@@ -6,7 +6,7 @@ Requirements:
     - lz.swapi_spaceship
     - lz.sws_sales
     - sz.dim_film
-    - sz.dim_spaceship
+    - sz.dim_starship
     - sz.dim_customer
     - sz.dim_product
     - sz.dim_promo_code
@@ -23,9 +23,9 @@ CREATE SCHEMA lz
         txt_film_release_date TEXT
     )
 
-    CREATE TABLE swapi_spaceship
+    CREATE TABLE swapi_starship
     (
-        txt_spaceship_name TEXT
+        txt_starship_name TEXT
     )
 
     CREATE TABLE sws_sales
@@ -53,10 +53,10 @@ CREATE SCHEMA sz
         ts_updated TIMESTAMP
     )
 
-    CREATE TABLE dim_spaceship
+    CREATE TABLE dim_starship
     (
-        int_spaceship_id INT GENERATED ALWAYS AS IDENTITY,
-        txt_spaceship_name TEXT,
+        int_starship_id INT GENERATED ALWAYS AS IDENTITY,
+        txt_starship_name TEXT,
         ts_created TIMESTAMP,
         ts_updated TIMESTAMP
     )
@@ -98,8 +98,8 @@ CREATE SCHEMA cz
     CREATE VIEW v_film AS
         SELECT * FROM sz.dim_film
 
-    CREATE VIEW v_spaceship AS
-        SELECT * FROM sz.dim_spaceship
+    CREATE VIEW v_starship AS
+        SELECT * FROM sz.dim_starship
 
     CREATE VIEW v_customer AS
         SELECT * FROM sz.dim_customer

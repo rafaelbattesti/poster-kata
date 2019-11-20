@@ -30,6 +30,15 @@ services:
     build:
       context: .
       dockerfile: ./svc-datagen/Dockerfile
+
+  svc-etl:
+    image: svc-etl
+    restart: always
+    container_name: svc-etl
+    build:
+      context: .
+      dockerfile: ./svc-etl/Dockerfile
+
       
 volumes:
   pgdata:

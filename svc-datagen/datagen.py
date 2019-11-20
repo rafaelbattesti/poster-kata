@@ -1,1 +1,1 @@
-print("Hello datagen")
+print("Let's generate some data fun?")
