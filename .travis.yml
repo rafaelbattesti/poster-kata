@@ -1,0 +1,28 @@
+sudo: required
+dist: xenial
+language: python
+
+env:
+  global:
+    - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+
+services:
+  - docker
+
+stages:
+  - name: BUILD
+
+jobs:
+  include:
+    - stage: BUILD
+      script:
+        - docker-compose build
+      after_success:
+        - echo "Python version [${TRAVIS_PYTHON_VERSION}]"
+        - echo "Git commit [${TRAVIS_COMMIT}]"
+        - docker tag rafaelbattesti/poster-kata/svc-database
+        - docker login --username rafaelbattesti --password ${REGISTRY_TOKEN}
+        - docker push svc-database:latest
+        - docker logout
+      after_failure:
+        - echo "The build stage failed. Skipping deploy to CEDP."
