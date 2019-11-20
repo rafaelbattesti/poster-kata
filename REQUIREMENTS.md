@@ -18,21 +18,15 @@
 - [x] Setup docker-compose services
 
 ## SWAPI
-- [ ] Read: https://swapi.co/documentation
-- [ ] Understand the data available
-- [ ] Understand the tools
+- [x] Read: https://swapi.co/documentation
+- [x] Understand the data available
+- [x] Understand the tools
 
 ## Database Service
 - [x] Home of **source** and **dw** for simplicity
 - [x] Create **source**
 - [ ] Populate **source**
 - [x] Create **dw**
-
-### Source Database
-- [ ] Name: source
-- [ ] Topology: star
-- [ ] Dimensions: dim_customer, dim_sales_rep, dim_promo_code, dim_poster
-- [ ] Fact: fact_order, fact_order_line
 
 ### Source sample data
 * poster_content | string | "Millennium Falcon"

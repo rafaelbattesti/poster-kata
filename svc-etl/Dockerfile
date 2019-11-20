@@ -1,7 +1,7 @@
 FROM py-base
 
-COPY ./svc-etl/src /svc-etl
+COPY ./svc-etl /svc-etl
 
 WORKDIR /svc-etl
 
-CMD python extract.py
+CMD python src/extract.py

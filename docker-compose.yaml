@@ -39,6 +39,19 @@ services:
       context: .
       dockerfile: ./svc-etl/Dockerfile
 
-      
+  svc-etl-style:
+    image: svc-etl-style
+    container_name: svc-etl-style
+    build:
+      context: .
+      dockerfile: ./svc-etl/test/style/Dockerfile
+
+  svc-etl-pytest:
+    image: svc-etl-pytest
+    container_name: svc-etl-pytest
+    build:
+      context: .
+      dockerfile: ./svc-etl/test/pytest/Dockerfile
+
 volumes:
   pgdata:
