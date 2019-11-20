@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/rafaelbattesti/poster-kata.svg?branch=master)](https://travis-ci.org/rafaelbattesti/poster-kata)
+
 # Star Wars Shop Data Warehouse
 This is a simple example of a systems that pulls data from different sources and provides visibility to clients
 
