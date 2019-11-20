@@ -1,5 +1,14 @@
 version: "3"
 services:
+
+  py-base:
+    image: py-base
+    restart: always
+    container_name: py-base
+    build:
+      context: .
+      dockerfile: ./py-base/Dockerfile
+
   svc-postgres:
     image: svc-postgres
     restart: always
@@ -13,5 +22,14 @@ services:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+
+  svc-datagen:
+    image: svc-datagen
+    restart: always
+    container_name: svc-datagen
+    build:
+      context: .
+      dockerfile: ./svc-datagen/Dockerfile
+      
 volumes:
   pgdata:
