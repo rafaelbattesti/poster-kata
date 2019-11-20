@@ -12,7 +12,7 @@ createdb sws
 createdb sws_dw
 
 # Create schemas
-psql -v ON_ERROR_STOP=1 --username "${POSTGRES_USER}" --dbname sws < /svc-database/init/sws.sql
-psql -v ON_ERROR_STOP=1 --username "${POSTGRES_USER}" --dbname sws_dw < /svc-database/init/sws_dw.sql
+psql -v ON_ERROR_STOP=1 --username "${POSTGRES_USER}" --dbname sws < /svc-postgres/init/sws.sql
+psql -v ON_ERROR_STOP=1 --username "${POSTGRES_USER}" --dbname sws_dw < /svc-postgres/init/sws_dw.sql
 
 # TODO: Grant permissions - isolate schemas

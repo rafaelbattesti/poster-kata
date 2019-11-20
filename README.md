@@ -22,10 +22,10 @@ Customer data ingested should be anonymized (PII)
 ### Databases
 
 1. **Data Warehouse (Target)**: sws_dw
-* **Schemas/Zones**: landing (lz), structured (sz), consumer (cz)
+**Schemas/Zones**: landing (lz), structured (sz), consumer (cz)
 
 2. **SWS Database (Source)**: sws
-* **Schemas**: ordering
+**Schemas**: ordering
 
 ### APIs
 1. swapi: https://swapi.co/
