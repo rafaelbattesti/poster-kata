@@ -20,9 +20,9 @@ jobs:
       after_success:
         - echo "Python version [${TRAVIS_PYTHON_VERSION}]"
         - echo "Git commit [${TRAVIS_COMMIT}]"
-        - docker tag svc-postgres rafaelbattesti/posterkata/postgres
+        - docker tag svc-postgres posterkata/postgres
         - docker login --username rafaelbattesti --password ${REGISTRY_TOKEN}
-        - docker push rafaelbattesti/posterkata/postgres
+        - docker push posterkata/postgres
         - docker logout
       after_failure:
         - echo "The build stage failed. Skipping deploy to CEDP."
