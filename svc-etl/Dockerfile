@@ -4,4 +4,4 @@ COPY ./svc-etl /svc-etl
 
 WORKDIR /svc-etl
 
-CMD python src/extract.py
+CMD python driver.py

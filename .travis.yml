@@ -4,6 +4,8 @@ language: python
 
 env:
   global:
+    - POSTGRES_HOST=${POSTGRES_HOST}
+    - POSTGRES_USER=${POSTGRES_USER}
     - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
 
 services:

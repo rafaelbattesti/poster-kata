@@ -7,6 +7,7 @@ Requirements:
     - ordering.dim_promo_code
     - ordering.fact_sales_order
     - ordering.fact_sales_order_item
+    - ordering.v_sales
 */
 CREATE SCHEMA ordering
 
@@ -48,4 +49,11 @@ CREATE SCHEMA ordering
         int_product_id INT NOT NULL,
         int_sales_order_item_qty INT NOT NULL
     )
+
+    CREATE VIEW v_sales AS
+        SELECT b.*, c.* FROM fact_sales_order a
+            JOIN fact_sales_order_item b
+                ON a.int_sales_order_id = b.int_sales_order_id
+            JOIN dim_customer c
+                ON a.int_customer_id = c.int_customer_id
 ;

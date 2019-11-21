@@ -3,8 +3,11 @@ services:
 
   py-base:
     image: py-base
-    restart: always
     container_name: py-base
+    environment:
+      - POSTGRES_HOST=${POSTGRES_HOST}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     build:
       context: .
       dockerfile: ./py-base/Dockerfile
@@ -13,11 +16,13 @@ services:
     image: svc-postgres
     restart: always
     container_name: svc-postgres
+    environment:
+      - POSTGRES_HOST=${POSTGRES_HOST}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     build:
       context: .
       dockerfile: ./svc-postgres/Dockerfile
-    environment:
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     ports:
       - "5432:5432"
     volumes:
@@ -30,6 +35,9 @@ services:
     build:
       context: .
       dockerfile: ./svc-datagen/Dockerfile
+    depends_on:
+      - py-base
+      - svc-postgres
 
   svc-etl:
     image: svc-etl
@@ -38,6 +46,9 @@ services:
     build:
       context: .
       dockerfile: ./svc-etl/Dockerfile
+    depends_on:
+      - py-base
+      - svc-postgres
 
   svc-etl-style:
     image: svc-etl-style
@@ -45,6 +56,8 @@ services:
     build:
       context: .
       dockerfile: ./svc-etl/test/style/Dockerfile
+    depends_on:
+      - svc-etl
 
   svc-etl-pytest:
     image: svc-etl-pytest
@@ -52,6 +65,8 @@ services:
     build:
       context: .
       dockerfile: ./svc-etl/test/pytest/Dockerfile
+    depends_on:
+      - svc-etl
 
 volumes:
   pgdata:

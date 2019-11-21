@@ -2,8 +2,7 @@
 Author: Rafael Battesti - rafaelbattesti.com
 Since: 2019-11-19
 Requirements: 
-    - lz.swapi_film
-    - lz.swapi_spaceship
+    - lz.swapi_starship_film
     - lz.sws_sales
     - sz.dim_film
     - sz.dim_starship
@@ -17,14 +16,10 @@ Requirements:
 */
 CREATE SCHEMA lz
     
-    CREATE TABLE swapi_film
+    CREATE TABLE swapi_starship_film
     (
-        txt_film_name TEXT,
-        txt_film_release_date TEXT
-    )
-
-    CREATE TABLE swapi_starship
-    (
+        txt_film_title TEXT,
+        txt_film_release_date TEXT,
         txt_starship_name TEXT
     )
 
