@@ -1,4 +1,6 @@
-![Star Wars Logo](https://github.com/rafaelbattesti/poster-kata/blob/master/docs/sw_logo_1.png)
+<p align="center">
+  <img width="460" height="300" src="https://github.com/rafaelbattesti/poster-kata/blob/master/docs/sw_logo_1.png">
+</p>
 
 [![Build Status](https://travis-ci.org/rafaelbattesti/poster-kata.svg?branch=master)](https://travis-ci.org/rafaelbattesti/poster-kata)
 [![Code Style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
