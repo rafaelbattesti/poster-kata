@@ -30,7 +30,6 @@ services:
 
   svc-datagen:
     image: svc-datagen
-    restart: always
     container_name: svc-datagen
     build:
       context: .

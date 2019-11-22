@@ -6,7 +6,6 @@ Module to provide data access, from and to external or internal persistence(i.e.
 
 import csv
 import os
-from io import StringIO
 
 import pandas as pd
 import pandas.io.sql as sqlio
@@ -17,29 +16,29 @@ from core.domain import StarshipFilm
 
 # DBs
 # TODO: Investigate docker-compose .env
-POSTGRES_HOST = os.getenv("POSTGRES_HOST", "svc-postgres")
-POSTGRES_USER = os.getenv("POSTGRES_USER", "postgres")
-POSTGRES_PASSWORD = os.getenv("POSTGRES_PASSWORD", "YqEa3$R8wpUJVJJc")
-POSTGRES_BASE_CONNECTION_STRING = "postgresql://{}:{}@{}/{}"
+PG_HOST = os.getenv("POSTGRES_HOST", "svc-postgres")
+PG_USER = os.getenv("POSTGRES_USER", "postgres")
+PG_PASS = os.getenv("POSTGRES_PASSWORD", "YqEa3$R8wpUJVJJc")
+PG_BASE_CONNECTION_STRING = "postgresql://{}:{}@{}/{}"
 
 # SWS_DW
 SWS_DW_DB = "sws_dw"
-SWS_DW_CONNECTION_STRING = POSTGRES_BASE_CONNECTION_STRING.format(
-    POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_HOST, SWS_DW_DB
+SWS_DW_CONNECTION_STRING = PG_BASE_CONNECTION_STRING.format(
+    PG_USER, PG_PASS, PG_HOST, SWS_DW_DB
 )
 
 # SWS
 SWS_DB = "sws"
-SWS_CONNECTION_STRING = POSTGRES_BASE_CONNECTION_STRING.format(
-    POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_HOST, SWS_DB
+SWS_CONNECTION_STRING = PG_BASE_CONNECTION_STRING.format(
+    PG_USER, PG_PASS, PG_HOST, SWS_DB
 )
-SWS_SOURCE = "ordering.v_sales"
-SWS_TARGET_CSV_PATH = "sws_sales.csv"
-SWS_TARGET_LZ = "lz.sws_sales"
+SWS_SALES_SRC = "ordering.v_sales"
+SWS_SALES_CSV = "sws_sales.csv"
+SWS_SALES_TGT = "lz.sws_sales"
 
 # SWAPI
-SWAPI_TARGET_CSV_PATH = "swapi_starship_film.csv"
-SWAPI_TARGET_LZ = "lz.swapi_starship_film"
+SWAPI_STARSHIP_FILM_CSV = "swapi_starship_film.csv"
+SWAPI_STARSHIP_FILM_TGT = "lz.swapi_starship_film"
 
 
 def get_sws_dw_conn():
@@ -74,48 +73,38 @@ def source_swapi_starship_film_df():
 
 def source_sws_sales_df():
     """ Fetch sales data from ordering system """
-    sql = "SELECT * FROM {};".format(SWS_SOURCE)
+    sql = "SELECT * FROM {};".format(SWS_SALES_SRC)
     conn = get_sws_conn()
     return sqlio.read_sql_query(sql, conn)
 
 
-def save_swapi_starship_film_csv(df_starship_film):
-    df_starship_film.to_csv(
-        SWAPI_TARGET_CSV_PATH,
-        index=False,
-        header=False,
-        quoting=csv.QUOTE_NONNUMERIC,
-        sep=",",
+def save_csv(df, csv_file):
+    df.to_csv(
+        csv_file, index=False, header=False, quoting=csv.QUOTE_NONNUMERIC, sep=",",
     )
+
+
+def save_swapi_starship_film_csv(df_starship_film):
+    save_csv(df_starship_film, SWAPI_STARSHIP_FILM_CSV)
 
 
 def save_sws_sales_csv(df_sales):
-    df_sales.to_csv(
-        SWS_TARGET_CSV_PATH,
-        index=False,
-        header=False,
-        quoting=csv.QUOTE_NONNUMERIC,
-        sep=",",
-    )
+    save_csv(df_sales, SWS_SALES_CSV)
+
+
+def push_table(conn, csv, table):
+    cursor = conn.cursor()
+    sql = """COPY {} FROM STDIN WITH CSV DELIMITER AS ','"""
+    with open(csv) as f:
+        cursor.copy_expert(
+            sql=sql.format(table), file=f,
+        )
+    conn.commit()
 
 
 def push_sws_dw_sales_raw():
-    conn = get_sws_dw_conn()
-    cursor = conn.cursor()
-    sql = """COPY {} FROM STDIN WITH CSV DELIMITER AS ','"""
-    with open(SWS_TARGET_CSV_PATH, "r") as f:
-        cursor.copy_expert(
-            sql=sql.format(SWS_TARGET_LZ), file=f,
-        )
-    conn.commit()
+    push_table(get_sws_dw_conn(), SWS_SALES_CSV, SWS_SALES_TGT)
 
 
 def push_sws_dw_starship_film_raw():
-    conn = get_sws_dw_conn()
-    cursor = conn.cursor()
-    sql = """COPY {} FROM STDIN WITH CSV DELIMITER AS ','"""
-    with open(SWAPI_TARGET_CSV_PATH, "r") as f:
-        cursor.copy_expert(
-            sql=sql.format(SWAPI_TARGET_LZ), file=f,
-        )
-    conn.commit()
+    push_table(get_sws_dw_conn(), SWAPI_STARSHIP_FILM_CSV, SWAPI_STARSHIP_FILM_TGT)

@@ -13,11 +13,15 @@ CREATE SCHEMA ordering
 
     CREATE TABLE dim_customer
     (
-        int_customer_id INT GENERATED ALWAYS AS IDENTITY,
+        int_customer_id SERIAL PRIMARY KEY,
         txt_customer_name TEXT NOT NULL,
-        txt_customer_address TEXT,
+        txt_customer_email TEXT NOT NULL,
         txt_customer_city TEXT,
-        dt_customer_dob DATE
+        txt_customer_state TEXT,
+        txt_customer_country TEXT,
+        dt_customer_dob DATE,
+        txt_customer_job_title TEXT,
+        txt_customer_company TEXT
     )
 
     CREATE TABLE dim_product
