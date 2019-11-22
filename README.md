@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="460" height="300" src="https://github.com/rafaelbattesti/poster-kata/blob/master/docs/sw_logo_1.png">
+  <img src="https://github.com/rafaelbattesti/poster-kata/blob/master/docs/sw_logo_1.png">
 </p>
 
 [![Build Status](https://travis-ci.org/rafaelbattesti/poster-kata.svg?branch=master)](https://travis-ci.org/rafaelbattesti/poster-kata)
