@@ -1,3 +1,5 @@
+![Star Wars Logo](https://www.google.com/url?sa=i&url=https%3A%2F%2Fimgbin.com%2Fpng%2FRsyN13P5%2Fanakin-skywalker-star-wars-sticker-darth-skywalker-family-png&psig=AOvVaw1clFev85DM2M_VRFKsztmJ&ust=1574529192877000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCOj_1sGo_uUCFQAAAAAdAAAAABAJ)
+
 [![Build Status](https://travis-ci.org/rafaelbattesti/poster-kata.svg?branch=master)](https://travis-ci.org/rafaelbattesti/poster-kata)
 [![Code Style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
