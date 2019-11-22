@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/rafaelbattesti/poster-kata.svg?branch=master)](https://travis-ci.org/rafaelbattesti/poster-kata)
+![Black Logo](https://raw.githubusercontent.com/psf/black/master/docs/_static/logo2-readme.png)
 
 # ProjectSWDemo - Star Wars Shop (SWS)
 This project implements an ETL service for the fictitious **Star Wars Shop** to extract data from 2 sources namely `swapi` and `sws` db. 
